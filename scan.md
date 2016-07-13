@@ -22,7 +22,7 @@ devices need to perform the following actions:
     current IP settings,
 
 -   Process incoming [network configuration
-    requests](#request-diagram).
+    requests](#request-datagram).
 
 ## Requirements
 
