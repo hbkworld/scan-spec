@@ -143,105 +143,45 @@ different announcements carrying the same uuid.
 
 ##### Explanation of Keys
 
-  -------------------------------------------------------------------------
-  key                                  description
-  ------------------------------------ ------------------------------------
-  "apiVersion"                            Version of the HBM discovery protocol
-
-  -------------------------------------------------------------------------
+| key          | description                           |
+| ------------ | ------------------------------------- |
+| "apiVersion" | Version of the HBM discovery protocol |
 
 ###### Device Subtree
 
 The device subtree describes some properties of the device.
 
-  -------------------------------------------------------------------------
-  key                                  description
-  ------------------------------------ ------------------------------------
-  "uuid"                               A string containing the worldwide unique 
-                                       ID of the device. That might be the MAC
-                                       address of a network interface card.
-                                       This uuid is necessary to address
-                                       devices by a dedicated request.
-
-  "name"                               An optional string containing the
-                                       name of the device.
-
-  "type"                               A string describing the type of the
-                                       device, e.g. for a QuantumX MX840
-                                       this will contain "MX840".
-
-  "label"                              An optional string with the text as printed on the device type label.
-
-  "familyType"                         A string describing the family type
-                                       of the device, e.g. QuantumX or
-                                       PMX.
-
-  "firmwareVersion"                    A string containing the firmware
-                                       version of the device.
-
-  "isRouter"                           this key is send with value true if the module acts as a IP router.
-
-  -------------------------------------------------------------------------
-
-  : Device Subtree Keys
+| key                                  | description |
+| ------------------------------------ |  ----------------------------------- |
+| "uuid"                               | A string containing the worldwide unique ID of the device. That might be the MAC address of a network interface card. This uuid is necessary to address devices by a dedicated request. |
+| "name"                               | An optional string containing the name of the device. |
+| "type"                               | A string describing the type of the device, e.g. for a QuantumX MX840 this will contain "MX840". |
+| "label"                              | An optional string with the text as printed on the device type label. |
+| "familyType"                         | A string describing the family type of the device, e.g. QuantumX or PMX. |
+| "firmwareVersion"                    | A string containing the firmware version of the device. |
+| "isRouter"                           | This key is send with value true if the module acts as a IP router. |
 
 ###### Interface Subtree
 
 The interface subtree describes the properties of an network interface.
 
-  -------------------------------------------------------------------------
-  key                                  description
-  ------------------------------------ ------------------------------------
-  "name"                               A string containing the name of the
-                                       interface. For embedded Linux systems
-                                       typically something like eth0, eth1,
-                                       ...
-
-  "type"                               An optional string containing the
-                                       type of the interface. For QuantumX
-                                       systems it might be useful to
-                                       distinguish Ethernet and Firewire
-                                       interfaces.
-
-  "description"                        An optional string containing
-                                       some additional information.
-                                       QuantumX devices report whether
-                                       the interface is on the front or
-                                       back side.
-
-  "configurationMethod"                A string enumeration describing how
-                                       the network settings configured on
-                                       the device during the startup.
-                                       Currently the values *manual*,
-                                       *dhcp* and *routerSolicitation* are
-                                       valid. *This key is now deprecated
-									   and shall not be used anymore.*
-
-  "ipv4"                               An array containig all IPv4
-                                       addresses of the interface with
-                                       their netmask
-
-  "ipv6"                               An array containig all IPv6
-                                       addresses of the interface with
-                                       their prefix
-  -------------------------------------------------------------------------
-
-  : Interface Subtree Keys
+| key                       | description |
+| ------------------------- | --------------------------------------------- |
+| "name"                    | A string containing the name of the interface. For embedded Linux systems typically something like eth0, eth1. |
+| "type"                    | An optional string containing the type of the interface. For QuantumX systems it might be useful to distinguish Ethernet and Firewire  interfaces.|
+| "description"             | An optional string containing some additional information. QuantumX devices report whether the interface is on the front or back side.|
+| "configurationMethod"     | A string enumeration describing how the network settings configured on the device during the startup. Currently the values *manual*, *dhcp* and *routerSolicitation* are valid. *This key is now deprecated and shall not be used anymore.* |
+| "ipv4"                    | An array containig all IPv4 addresses of the interface with their netmask. |
+| "ipv6"                    | An array containig all IPv6 addresses of the interface with their prefix. |
 
 ###### Router Subtree
 
 The optional router subtree describes if a device is connected to a
 special router device, for instance the CX27 in QuantumX.
 
-  -------------------------------------------------------------------------
-  key                                  description
-  ------------------------------------ ------------------------------------
-  "uuid"                               A string containing the unique ID of
-                                       the router the device is connected
-                                       to.
-  -------------------------------------------------------------------------
-
-  : Router Subtree Keys
+|  key   | description |
+| ------ |--- ---------|
+| "uuid" | A string containing the unique ID of the router the device is connected to. |
 
 ###### Service Subtree
 
@@ -252,14 +192,10 @@ e.g. specify how to connect to the data acquisition service.
 The content of the service subtree is totally device specific and not
 specified in this document.
 
--------------------------------------------------------------------------
-  key                                  description
------------------------------------- ------------------------------------
-  "type"                               Name of the service
-
-  "port"                               IP port of the service
--------------------------------------------------------------------------
-  : Service Subtree Keys
+| key    | description |
+| ------ | ----------- |
+| "type" | Name of the service |
+| "port" | IP port of the service |
 
 ###### Expiration Key
 
@@ -341,64 +277,29 @@ that "id" has a unique value. Otherwise you might confuse responses.
 
 Contains all required parameters for the request.
 
-  -------------------------------------------------------------------------
-  key                                  description
-  ------------------------------------ ------------------------------------
-  "ttl"                                An optional key which limits the
-                                       number of router hops a configure
-                                       request/response can cross. Leaving
-                                       out this key should default to a ttl
-                                       (Time to live) of 1 when sending
-                                       datagrams, so no router boundary is
-                                       crossed.
-  -------------------------------------------------------------------------
-
-  : Params Subtree Keys
+| key   | description |
+| ----- | ----------- |
+| "ttl" | An optional key which limits the number of router hops a configure request/response can cross. Leaving out this key should default to a ttl (Time to live) of 1 when sending datagrams, so no router boundary is crossed. |
 
 ####### Device Subtree
 
 Conatains the device to be configured.
 
-  -------------------------------------------------------------------------
-  key                                  description
-  ------------------------------------ ------------------------------------
-  "uuid"                               This string contains the unique ID
-                                       of the device that should be
-                                       configured. The uuid itself must be
-                                       gathered from an announce datagram.
-  -------------------------------------------------------------------------
-
-  : Device Subtree Keys
+| key    | description |
+| ------ | ----------- |
+| "uuid" | This string contains the unique ID of the device that should be configured. The uuid itself must be gathered from an announce datagram. |
 
 ####### Interface Subtree
 
 Contains the information how the interface identified by "name" shall be
 configured.
 
-  -------------------------------------------------------------------------
-  key                                  description
-  ------------------------------------ ------------------------------------
-  "name"                               A string containing the interface
-                                       name that should be configured. The
-                                       interface name must be gathered from
-                                       an announce datagram.
-
-  "configurationMethod"                A string enumeration describing how
-                                       the network settings configured on
-                                       the device during the startup.
-                                       Currently the values *manual* and
-                                       *dhcp* are valid.
-
-  "manualAddress"                      An optional string containing the
-                                       manual IP address that should be
-                                       configured on the device.
-
-  "manualNetmask"                      An optional string containing the
-                                       manual IP netmask that should be
-                                       configured on the device.
-  -------------------------------------------------------------------------
-
-  : Interface Subtree Keys
+| key                   | description |
+| --------------------- | ----------- |
+| "name"                | A string containing the interface name that should be configured. The interface name must be gathered from an announce datagram. |
+| "configurationMethod" | A string enumeration describing how the network settings configured on the device during the startup. Currently the values *manual* and *dhcp* are valid. |
+| "manualAddress"       | An optional string containing the manual IP address that should be configured on the device. |
+| "manualNetmask"       | An optional string containing the manual IP netmask that should be configured on the device. |
 
 #### Response Datagram
 
