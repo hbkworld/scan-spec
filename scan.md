@@ -77,7 +77,7 @@ The [JSON-RPC](http://www.jsonrpc.org/specification) datagrams sent
 model a request-response or notification communication. There are
 dedicated requests (requests addressing exactly one device) and
 non-dedicated notifications (notification addressing all devices that
-might be reachable). The dedicated requests feature an "id" key to match
+might be reachable). The dedicated requests feature an `"id"` key to match
 requests and responses.
 
 ### Device Announcement
@@ -262,14 +262,14 @@ the device addressed by request/configure/device/uuid must answer with a
 network configuration response datagram.
 
 Because network configuration request datagrams are dedicated requests,
-they contain an "id" key to match requests and responses. Please look
+they contain an `"id"` key to match requests and responses. Please look
 into the [JSON-RPC 2.0
 specification](http://www.jsonrpc.org/specification) for an explanation
 of the keys `"method"`, `"params"` and `"id"`.
 
 Request and response are send via multicast. Hence everyone that joined
 the multicast group is going to receive both messages.  Please make sure
-that "id" has a unique value. Otherwise you might confuse responses.
+that `"id"` has a unique value. Otherwise you might confuse responses.
 
 ##### Explanation of Keys
 
