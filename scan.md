@@ -102,7 +102,7 @@ different announcements carrying the same uuid.
       "uuid": <string>,
       "name": <string>,
       "type": <string>,
-      "label: <string>,
+      "label": <string>,
       "familyType": <string>,
       "firmwareVersion": <string>,
       "isRouter": true|false
