@@ -18,11 +18,11 @@ PC) to communicate to embedded devices (devices throughout this
 document) regardless of their current IP configuration. To achieve this,
 devices need to perform the following actions:
 
--   Send [announce notifications](#announce-notification) on a regurlar basis regardless of the
+-   Send [announce notifications](#announcement-notification-datagram) on a regurlar basis regardless of the
     current IP settings,
 
 -   Process incoming [network configuration
-    requests](#configuration-request).
+    requests](#request-diagram).
 
 ## Requirements
 
@@ -90,7 +90,7 @@ Keep in mind: It is possible to receive announcement from the same
 device via several interfaces and via a router. Hence you might receive
 different announcements carrying the same uuid.
 
-#### Announcement Notification Datagram {#announce-notification}
+#### Announcement Notification Datagram
 
 ~~~~ {.javascript}
 {
@@ -145,7 +145,7 @@ different announcements carrying the same uuid.
 
 | key          | description                           |
 | ------------ | ------------------------------------- |
-| "apiVersion" | Version of the HBM discovery protocol |
+| `"apiVersion"` | Version of the HBM discovery protocol |
 
 ###### Device Subtree
 
@@ -153,13 +153,13 @@ The device subtree describes some properties of the device.
 
 | key                                  | description |
 | ------------------------------------ |  ----------------------------------- |
-| "uuid"                               | A string containing the worldwide unique ID of the device. That might be the MAC address of a network interface card. This uuid is necessary to address devices by a dedicated request. |
-| "name"                               | An optional string containing the name of the device. |
-| "type"                               | A string describing the type of the device, e.g. for a QuantumX MX840 this will contain "MX840". |
-| "label"                              | An optional string with the text as printed on the device type label. |
-| "familyType"                         | A string describing the family type of the device, e.g. QuantumX or PMX. |
-| "firmwareVersion"                    | A string containing the firmware version of the device. |
-| "isRouter"                           | This key is send with value true if the module acts as a IP router. |
+| `"uuid"`                               | A string containing the worldwide unique ID of the device. That might be the MAC address of a network interface card. This uuid is necessary to address devices by a dedicated request. |
+| `"name"`                               | An optional string containing the name of the device. |
+| `"type"`                               | A string describing the type of the device, e.g. for a QuantumX MX840 this will contain "MX840". |
+| `"label"`                              | An optional string with the text as printed on the device type label. |
+| `"familyType"`                         | A string describing the family type of the device, e.g. QuantumX or PMX. |
+| `"firmwareVersion"`                    | A string containing the firmware version of the device. |
+| `"isRouter"`                           | This key is send with value true if the module acts as a IP router. |
 
 ###### Interface Subtree
 
@@ -167,12 +167,12 @@ The interface subtree describes the properties of an network interface.
 
 | key                       | description |
 | ------------------------- | --------------------------------------------- |
-| "name"                    | A string containing the name of the interface. For embedded Linux systems typically something like eth0, eth1. |
-| "type"                    | An optional string containing the type of the interface. For QuantumX systems it might be useful to distinguish Ethernet and Firewire  interfaces.|
-| "description"             | An optional string containing some additional information. QuantumX devices report whether the interface is on the front or back side.|
-| "configurationMethod"     | A string enumeration describing how the network settings configured on the device during the startup. Currently the values *manual*, *dhcp* and *routerSolicitation* are valid. *This key is now deprecated and shall not be used anymore.* |
-| "ipv4"                    | An array containig all IPv4 addresses of the interface with their netmask. |
-| "ipv6"                    | An array containig all IPv6 addresses of the interface with their prefix. |
+| `"name"`                    | A string containing the name of the interface. For embedded Linux systems typically something like eth0, eth1. |
+| `"type"`                    | An optional string containing the type of the interface. For QuantumX systems it might be useful to distinguish Ethernet and Firewire  interfaces.|
+| `"description"`             | An optional string containing some additional information. QuantumX devices report whether the interface is on the front or back side.|
+| `"configurationMethod"`     | A string enumeration describing how the network settings configured on the device during the startup. Currently the values *manual*, *dhcp* and *routerSolicitation* are valid. *This key is now deprecated and shall not be used anymore.* |
+| `"ipv4"`                    | An array containig all IPv4 addresses of the interface with their netmask. |
+| `"ipv6"`                    | An array containig all IPv6 addresses of the interface with their prefix. |
 
 ###### Router Subtree
 
@@ -181,7 +181,7 @@ special router device, for instance the CX27 in QuantumX.
 
 |  key   | description |
 | ------ |--- ---------|
-| "uuid" | A string containing the unique ID of the router the device is connected to. |
+| `"uuid"` | A string containing the unique ID of the router the device is connected to. |
 
 ###### Service Subtree
 
@@ -194,8 +194,8 @@ specified in this document.
 
 | key    | description |
 | ------ | ----------- |
-| "type" | Name of the service |
-| "port" | IP port of the service |
+| `"type"` | Name of the service |
+| `"port"` | IP port of the service |
 
 ###### Expiration Key
 
@@ -229,9 +229,9 @@ It might also be necessary to reboot the device in order to apply the
 new interface configuration. The reboot is performed automatically when
 necessary. In this case the response will return with result=4.
 The device will continue announcing itself, when back online
-[“anncounce” notification](#announce-notification).
+[“anncounce” notification](#announcement-notification-datagram).
 
-#### Request Datagram {#configuration-request}
+#### Request Datagram
 
 ~~~~ {.javascript}
 {
@@ -265,7 +265,7 @@ Because network configuration request datagrams are dedicated requests,
 they contain an "id" key to match requests and responses. Please look
 into the [JSON-RPC 2.0
 specification](http://www.jsonrpc.org/specification) for an explanation
-of the keys "method", "params" and "id".
+of the keys `"method"`, `"params"` and `"id"`.
 
 Request and response are send via multicast. Hence everyone that joined
 the multicast group is going to receive both messages.  Please make sure
@@ -279,7 +279,7 @@ Contains all required parameters for the request.
 
 | key   | description |
 | ----- | ----------- |
-| "ttl" | An optional key which limits the number of router hops a configure request/response can cross. Leaving out this key should default to a ttl (Time to live) of 1 when sending datagrams, so no router boundary is crossed. |
+| `"ttl"` | An optional key which limits the number of router hops a configure request/response can cross. Leaving out this key should default to a ttl (Time to live) of 1 when sending datagrams, so no router boundary is crossed. |
 
 ####### Device Subtree
 
@@ -287,19 +287,19 @@ Conatains the device to be configured.
 
 | key    | description |
 | ------ | ----------- |
-| "uuid" | This string contains the unique ID of the device that should be configured. The uuid itself must be gathered from an announce datagram. |
+| `"uuid"` | This string contains the unique ID of the device that should be configured. The uuid itself must be gathered from an announce datagram. |
 
 ####### Interface Subtree
 
-Contains the information how the interface identified by "name" shall be
+Contains the information how the interface identified by `"name"` shall be
 configured.
 
 | key                   | description |
 | --------------------- | ----------- |
-| "name"                | A string containing the interface name that should be configured. The interface name must be gathered from an announce datagram. |
-| "configurationMethod" | A string enumeration describing how the network settings configured on the device during the startup. Currently the values *manual* and *dhcp* are valid. |
-| "manualAddress"       | An optional string containing the manual IP address that should be configured on the device. |
-| "manualNetmask"       | An optional string containing the manual IP netmask that should be configured on the device. |
+| `"name"`                | A string containing the interface name that should be configured. The interface name must be gathered from an announce datagram. |
+| `"configurationMethod"` | A string enumeration describing how the network settings configured on the device during the startup. Currently the values *manual* and *dhcp* are valid. |
+| `"manualAddress"`       | An optional string containing the manual IP address that should be configured on the device. |
+| `"manualNetmask"`       | An optional string containing the manual IP netmask that should be configured on the device. |
 
 #### Response Datagram
 
@@ -308,7 +308,7 @@ the sender of the request. It indicates whether the request was successful or
 not (See the specification of [JSON-RPC](http://www.jsonrpc.org/specification)
 for explanation of error reporting).
 
-# Reverse Path Filtering {#reverse-path-filtering}
+# Reverse Path Filtering
 Several Linux Distributions enable reverse path filtering by
 default. This prevents the HBM discovery mechanism from working. You can
 disable reverse path filtering by editing /etc/sysctl.conf and setting
