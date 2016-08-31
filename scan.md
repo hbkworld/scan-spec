@@ -179,8 +179,8 @@ The interface subtree describes the properties of an network interface.
 The optional router subtree describes if a device is connected to a
 special router device, for instance the CX27 in QuantumX.
 
-|  key   | description |
-| ------ |--- ---------|
+| key   | description |
+| ------ |------------|
 | `"uuid"` | A string containing the unique ID of the router the device is connected to. |
 
 ###### Service Subtree
