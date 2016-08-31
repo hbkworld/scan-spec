@@ -206,6 +206,8 @@ Otherwise the device is considered to be not available anymore.  Reasons
 can be a device power down/restart, a network problem or a device
 failure.
 
+The maximum expiration time is 60s. We do limit the expiration time to avoid crowds of devices that are not available anymore.
+
 ### Network Configuration
 
 Network configuration is only specified and allowed for
